@@ -2,5 +2,53 @@
 \begin{document}
 
 \subsection{Description of the project idea}
+Very often it happens that you do not know what to do even knowing many different kinds of places where you could go.
+This is where the idea is born, a social recommendation app where a user can save his favourite places and share them with his friends.
+Starting from this thinking we choosed \textbf{Social Places} as name for our application.
+The user can interact with three main subject:
+\begin{itemize}
+    \item Point Of Interest;
+    \item Live Events;
+    \item Friends;
+\end{itemize}
+A user can create and share a \textbf{point of interest} (from here we'll refere to it as \textbf{poi}), or create a \textbf{live event} that will be notified to all his friends, or interact with other people by sending, confirming, denying a friendship request or removing a friend.
+But the most interesting part is when the app interact with the user by recommending a suitable place for the actual user situation.
+
+There are two type of recommendation:
+\begin{itemize}
+    \item Periodic Recommendation, based on a timer;
+    \item Geofence Recommendation, based on the area of a poi;
+\end{itemize}
+As input for the recommendation model we provide:
+\begin{itemize}
+    \item Time of day (seconds);
+    \item Day of week (number);
+    \item Human activity recognized (activity name);
+    \item Actual position (latitude, longitude).
+    \item And the category of the place, in case of a Geofence Recommendation (place type).
+\end{itemize}
+\textbf{IN UNALTRA SEZIONE QUELLO SOTTO}
+
+    \paragraph*{Points Of Interest}
+A Point Of Interest is a collection of information describing a place, represented by a marker, on the map. 
+It is composed of:
+\begin{itemize}
+    \item \textbf{Name:} A personal name describing the place;
+    \item \textbf{Address:} The address of the marker on the map, caputered via google maps API;
+    \item \textbf{Phone number:} Telephone number of the place, if found via google maps API;
+    \item \textbf{Url:} Website url of the place, if found via google maps API;
+    \item \textbf{Type:} The category of the place:
+        \begin{itemize}
+            \item \textbf{Restaurant;}
+            \item \textbf{Sport;}
+            \item \textbf{Leisure;}
+            \item \textbf{Live Event;} 
+        \end{itemize}
+    \item \textbf{Visibility:} The Visibility of the place. If it is public the user's friends can see it, if it is private only the owner can see it;
+    \item \textbf{Latitude:} Latitude of the place;
+    \item \textbf{Longitude:} Longitude of the place;
+\end{itemize}
+    
+
 
 \end{document}

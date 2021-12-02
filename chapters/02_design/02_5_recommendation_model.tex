@@ -1,6 +1,38 @@
 \documentclass[../../main]{subfiles}
 \begin{document}
-
 \subsection{Recommendation model}
+After the data synthetization we build the dataset used as input to train our model. First of all we separeted the place cateogry columns because it represent the results that we want to predict, and we removed some useless information from the dataset like the data returned from Places API and the cluster index.
+\paragraph*{Oversample}
+We oversampled the dataset with two mechanism:
+\begin{itemize}
+    \item \textbf{RandomOverSampler} from imblearn;
+    \item \textbf{get\_dummies} from pandas.
+\end{itemize}
+
+We used RandomOverSampler to oversample X and y, and get\_dummies to oversample X relative to human activity
+because they are saved as string. We also one hot encoding the human activity to give more meaning to this value on the dataset.
+
+\paragraph*{Train}
+We used the 70\% of the dataset to perform the training and we used a \textbf{Decision Tree Classifier} to train a model able to
+predict the place category. 
+With a request input made of:
+\begin{itemize}
+    \item Seconds of day;
+    \item Day of week;
+    \item Latitude;
+    \item Longitude;
+    \item Human activity encoded.
+\end{itemize}
+we thought that the recommendation model should follow a path like \textit{' At this \textbf{Hour} in this \textbf{Day} in this \textbf{position} by doing this \textbf{human activity} the best place is \textbf{place category}. '}.
+Talking about node of the tree. This is due the fact we want to discriminate determinate category by the time of the day and the human activity we are performing.
+Ideally a user goes to the gym during the week but probably in the evening or early morning, 
+goes to a restaurant/bar in any day at breakfast, launch or dinner time and he is probably walking or still on that place.
+But probably he goes to some leisure place during the weekend in the middle morning, afternoon or any day after dinner in the evening/night.
+
+The latitude and longitude is used to further discriminate some activity in any places because the data collected from the users could change due to their different attitude in the various part of the world.
+(Most of the point are from USA or China)
+\paragraph*{Test}
+After the train we tested the model obtained with the remaining 30\% of the oversampled dataset and we have instantly obtained and accuracy neart to 65\%, that is very high due to the small dataset that we obtained from the preprocessing.
+Also we tried some recommendation request from the android client emulator and we received decent predictions. To continue improving the model we implemented the possibility to retrain it by adding the recommendation that the client has received, modified with the right category if he feels that the prediction didn't suit his needs. 
 
 \end{document}
