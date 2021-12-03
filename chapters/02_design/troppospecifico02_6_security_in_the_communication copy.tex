@@ -1,0 +1,33 @@
+\documentclass[../../main]{subfiles}
+\begin{document}
+\subsection{Security in the communication}
+\subsubsection*{HTTPS Server}
+Obviously we had to implement some security mechanism to avoid tracking of the user.\\
+\noindent{First of all we generate an https certificate for the nodejs server with \textbf{openssl} by doing:\newline}
+\begin{lstlisting}[language=bash]
+$ openssl req -x509 -newkey rsa:4096 -keyout https_private.pem 
+-out https_public.pem -sha256 -days 365
+\end{lstlisting}
+And a public key in bks for the client android so it can trust our server.
+
+\subsubsection*{RSA Encryption}
+The data about poi, live events and friends is sent and saved in plain on the database, since they can add any of those from everywhere they don't represent sensitive data about the user.
+But the recommendation are based on the actual position and this need to be obfuscated.
+Firstly we have thinked about using cloacking but this could be bad for the prediction doing to the possibility of multiple poi near the user.
+After that we thought also to use Dummy updates but to retrain model with the feedback of the user we need to send the actual position and the server doesn't know it because only the client knows.
+So we decided to implement a \textbf{Location Privacy Protection Mechanism} by using as function, to obscure the sensitive information, RSA encryption.
+This seems to suit our case because we need to exchange only the public key that is useless to decrypt the message, and even if it is sniffed and someone try to send a request to our server he still needs the firebase token from firebase auth.
+\noindent We generate the keys in this way:
+\begin{lstlisting}[language=bash]
+$ openssl genrsa -out recommendation_private_key.pem 4096
+$ openssl rsa -in recommendation_private_key.pem -pubout 
+    -outform PEM -out recommendation_public_key.pem 
+$ openssl rsa -in recommendation_private_key.pem -pubout 
+    -outform DER -out server_key.der
+\end{lstlisting}
+The first command generate a 4096 bytes long private key for the server, the second one his public key and the last one generate a public key in \.der extension for the android client so it can encrypt message for the server.
+We generate the pair of keys in the client once, directly from the phone by using andriod KeyStore Library, and save them in the android keystore directory.
+
+
+
+\end{document}
