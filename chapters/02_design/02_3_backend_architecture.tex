@@ -27,6 +27,14 @@ We can subdivide them into five main subjects:
     \item \textbf{User data API}, they enable users to send the backend their authentication and push notification tokens;
     \item \textbf{Recommendation API}, they enable users to register for receiving recommendation for generic places (i.e., pois) or for places of a specific category and to send data that enable the classifier to train again and improve its accuracy.
 \end{itemize}
+The external \textbf{Authentication service} is called for every API request coming from the users in order to verify if they have rights to perform certain operations or, in general, if they have rights to contact the server at all.
+Finally, the \textbf{Push notifications service} is called in the scenarios we already mentioned:
+\begin{itemize}
+    \item when a new friendship request is sent to a user or confirmed;
+    \item when a friend publishes a new live event;
+    \item when a periodic recommendation request or recommendation for a place of a specific category were received and thus need to be managed;
+    \item when the recommendation model retrained\footnote{It is a useful feature while developing, but it could actually be removed with a more mature release of the application and the system in its whole.}
+\end{itemize}
 
 \label{sss:recommendation-model}
 \subsubsection{Recommendation model}
