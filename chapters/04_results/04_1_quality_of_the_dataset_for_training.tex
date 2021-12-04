@@ -3,4 +3,10 @@
 
 \subsection{Quality of the dataset for training}
 
+The dataset involved in the train of the model has multiple positive and negative aspect because it evolved during the preprocessing.
+We started from \hyperref[geolife dataset]{ref:geolife} that is a huge collection of trajectories of different user, this was a good starting point 
+because with a big dataset we can train better our model. But obviously we had to preprocceses it to obtain a more meaningful data set. 
+The precision of the stay points seems to be good thanks to the use of Places API from google that return us a lot of points near the point of the request.
+And also we didn't have the human activity that the user from dataset was doing in that moment so we had to adapt it by generating in a random way to a certain
+attention to use only walk and still for a restaurant.
 \end{document}
