@@ -22,9 +22,12 @@
 \usepackage{fancyhdr}
 \usepackage{float}
 \usepackage[font=small,labelfont=bf]{caption}
+\usepackage{enumerate}
 
+\setcounter{secnumdepth}{3}
 \pagestyle{fancy}
 \renewcommand{\footrulewidth}{0.4pt} 
+\newcommand*{\namerefLabeled}[1]{\nameref{#1} (\autoref{#1})}
 \fancyhf{}
 \fancyhead[L]{SocialPlaces - Project Report}
 \fancyhead[R]{Project of the course ``Sistemi Context-Aware"}
