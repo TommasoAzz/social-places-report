@@ -1,6 +1,57 @@
 \documentclass[../../main]{subfiles}
 \begin{document}
 
+\label{ss:application-implementation-choices}
 \subsection{Application implementation choices}
+In \ref{ss:application-architecture} we expressed how the application is designed from a high-level perspective and how the different modules of the application should communicate between each other.\\
+We shall now present the choices we took in terms of technologies and implementation of the actual modules.
+
+\subsubsection{The operating system}
+The operating system we chose to develop the app for is \textit{Android} because it is more widespread and the resources available on the Internet are much more, compared for example to those available for \textit{iOS}.
+The tools we used for the development of the app are the \textbf{Android SDK} and \textbf{Android Studio} as an IDE, very helpful for developing Android applications and very well integrated within the Android ecosystem.
+
+\subsubsection{The authentication means}
+Instead of designing an authentication system ourselves, which would have taken a lot of time and resources (and possibly, bad security), we decided to opt for Google's \textbf{Firebase Authentication}, given its ease of use and availability for both the \textbf{Android SDK} and the technologies chosen for developing the backend, which are presented in \ref{ss:server-implementation-choices}.
+Since we wanted to focus more on the actual functionalities of the application, we took advantage of the Android's authentication UI for asking the user to authenticate.
+This interface, in a scenario in which the user actually logs in, returns a specific type of credentials which can be handled by the \textbf{Firebase Authentication} Android library for logging the user in and returning an API token, to be attached to every API call to the backend.
+
+\subsubsection{The push notification means}
+Since we were already using a \textbf{Firebase} product, we decided to use also \textbf{Firebase Cloud Messaging} by Google for managing the push notifications, since it also free to use.
+Its configuration is actually pretty straightforward and only requires to specify which possible push notifications can the application receive and what to do when the application updates the so-called \textit{notification token}.
+In fact, when the application is at its first run or when the \textbf{Firebase Cloud Messaging} Android library believes it is necessary, a \textit{notification token} is sent to the backend of the system through an API call.
+This is used by the backend to target specific devices (i.e., users) when notifications need to be dispatched.
+Every time a notification is received, the application handles it and on a tap by the user on it, the UI gets updated accordingly.
+
+\subsubsection{The UI}
+We kept the User Interface as essential as possible since we have no specific graphical skills in designing them.\\
+For the Android platform there are currently two ways for implementing the user interface:
+\begin{itemize}
+    \item \text{XML Layout}, which is the default way to create user interfaces, declaring an XML tree like one would for a web page, using tags from the \textit{Android XML Schema} and controlling its behaviour inside the Java/Kotlin codebase;
+    \item \text{Jetpack Compose}, which is a new way for building user interfaces in Android, that does not require any XML.
+\end{itemize}
+Since when we started the project \textbf{Jetpack Compose} was not stable yet for the public use, we decided to stick with \textbf{XML Layout}.
+
+\subsubsection{The geofence transitions manager and periodically activated tasks manager}
+In order to receive \textit{location-aware} recommendations (i.e., those based on the user entrance in a geofence) and \textit{periodical} recommendations we implemented the services the \textbf{Android SDK} provides for these purposes.\\
+In detail:
+\begin{itemize}
+    \item for the \textit{location-aware} recommendations, we used Android's \textbf{Geofencing Client}, in which we can register a geofence for each poi the user has in its pois list and every time a new one is created.
+    Every geofence is a circular area with centre in the poi coordinates and radius to be programmatically set (we chose 300 metres);
+    \item for the \textit{periodical} recommendations, we used Android's \textbf{Alarm Manager}, in which we can register tasks to be executed every time a previously set alarm fires.
+\end{itemize}
+
+\subsubsection{The location updates manager and human activity recognition}
+Getting location updates and the current human activity is made possible again by implementing the services of the \textbf{Android SDK} for these purposes.\\
+In detail:
+\begin{itemize}
+    \item the current location is obtained using Android's \textbf{Fused Location Provider Client}, in which we can set the precision of the returned coordinates and the update interval;
+    \item the current human activity is instead obtained using Android's \textbf{Activity Recognition Client}, with which we can get a list of possible current human activities with their level of accuracy.
+\end{itemize}
+
+\subsubsection{The API connectors and business logic}
+Connecting to the backend through its API required an HTTP client since the server implements RESTful APIs, as it is explained more in detail in \ref{ss:server-implementation-choices}.
+For this reason we chose the \textbf{Retrofit} library which allows the developer to focus mainly on the data aspect of the communication, that is, the input and output arguments, and of course which endpoints to contact.\\
+By the way, some work still need to be done: error handling, for example. That is why there is also a module of the application, the \textbf{business logic}, which purpose is to create an extra layer between the bare API calls and the UI.
+
 
 \end{document}
