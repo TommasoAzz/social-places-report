@@ -19,7 +19,7 @@ We use a distance threshold of 100 meters and a time threshold of 5 minutes to f
 \end{figure}
 
 \paragraph{Cluster}
-From the staypoint extracted we generated the clusters by using DBscan using as eps (maximum distance between two points to be considered neighbor) 
+From the staypoint extracted we generated the clusters by using DBscan and as eps (maximum distance between two points to be considered neighbor) 
 300 meters because we think that a stay point should work in a radius of 300 meters. Then we used the clustered stay points to ask Place APIs, from Google, 
 which categories of business activty were found, we save the nearest one and we use as time for that activity the quantile of the time of arrival in UTC format.
 We had to cluster the stay points because Place API is not free and the sp we found were really a lot. Probably with a free API we could train a more precise model.
@@ -30,7 +30,7 @@ the most frequently situation when a user need to find some place to eat is when
 Instead for sport or leisure we generated also activity as car, bus or bike besides walk and still. The main thought was that when a user is moving with 
 some transport he is going to hang out and want to have fun or maybe is going in same green space to take a walk or run.
 
-By doing this we generated a dataset with clustered stay point were we can infer, thanks to a Decistion Tree, which place should be recommended by 
+By doing this we generated a dataset with clustered stay point were we can infer, thanks to a Decision Tree, which place should be recommended by 
 receiving as input the user position, his human activity and the actual time.
 
 \end{document}

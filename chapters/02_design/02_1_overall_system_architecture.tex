@@ -10,11 +10,10 @@ The system is divided in three main part:
         \item A Database.
     \end{itemize}
 
-A overall picture describing the architecture is avaible at \hyperref[fig:system_architecture]{System architecture}.
+An overall picture describing the architecture is avaible at \hyperref[fig:simple_system_architecture]{System architecture}.
 
 \paragraph*{Authentication}
-We want to use a mechanism that can generate an unique token starting from user data and store it in our database. ù
-We'll use in the next APIs to check if the user from the request and the token provided in the Headers match.
+We want to use a mechanism that can generate an unique token starting from user data and store it in our database. We'll use in the next APIs to check if the user from the request and the token provided in the Headers match.
 
 \paragraph*{RESTful APIs}
 The clients and the server communicate via RESTful APIs. We thought to implement a collection of APIs for each relevant part of data:
