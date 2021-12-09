@@ -1,6 +1,9 @@
 # Visual Studio Code
 .vscode/
 
+# WSL
+*:Zone.Identifier
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
