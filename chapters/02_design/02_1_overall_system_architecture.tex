@@ -22,10 +22,11 @@ An overall diagram describing the architecture follows.
 
 \noindent
 We will go more in detail about the \textbf{mobile application} and the \textbf{backend server} in the following two sections; here we just want to discuss a little more about the \textbf{authentication} and \textbf{push notification} \textbf{services}.
-
+\newpage
 \subsubsection{Authentication service}
-Since the goal of the project is to develop a context-aware system we chose to focus on this aspect and try to take advantage of already available software.\\
-In the area of authentication, there are many providers that offer this kind of service. Our need is that this kind of service allows users to:
+Since the goal of the project is to develop a context-aware system we chose to focus on this aspect.
+%  and try to take advantage of already available software.\\In the area of authentication, there are many providers that offer this kind of service. 
+\\Our need is that this kind of service allows users to:
 \begin{itemize}
     \item register an account with an e-mail address and a password;
     \item login with the credentials they used for registering;
@@ -34,7 +35,8 @@ In the area of authentication, there are many providers that offer this kind of 
 
 \subsubsection{Push notification service}
 For the two main mobile operating systems, Android and iOS, there are already technologies that enable this requirement in a way that suit our needs.
-In this situation, it would be really reinventing the wheel trying to implement this service ourselves and therefore we just need to utilize a service that allows to:
+% In this situation, it would be really reinventing the wheel trying to implement this service ourselves and therefore 
+We just need a service that allows to:
 \begin{itemize}
     \item send notifications at every time of the day to users that have registered for receiving them;
     \item it is not specific to an operating system only.
