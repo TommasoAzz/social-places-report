@@ -9,6 +9,8 @@ The system we developed can be expanded with some other features that could make
     \item in the mobile application, users can currently accept or deny friend requests only when received via push notification. 
     If they lose the notification or skip handling it, then the friend request is also lost.
     One possible way would be to have another screen in which all request are shown and can be either accepted or denied;
+    \item the periodic recommendations are only received every three hours and, unless the user stops them, this is the only possible interval.
+    Users may want to change this interval and therefore the mobile application should enable this;
     \item the recommendation model has been trained on a dataset which is very little and unbalanced (since a lot of points are located in Asia).
     This could be fixed by having many users actually utilizing the system and rating the recommendations they receive (and that would be better than any kind of synthetization of data);
     \item again on the recommendation model, if the dataset were to grow, it could be a good idea to try different kinds of classifiers (even trying to build a neural network);

@@ -3,9 +3,9 @@
 
 \label{ss:description-project-idea}
 \subsection{Description of the project idea}
-We are sure that everybody has found themself in the situation in which they do not know what to do even if they know many different kinds of places where they could go.
-This is the starting point of the idea behind the project, that evolved into a social recommendation mobile app where users can save their favourite places and share them with their friends.
-The name of this project came naturally from this idea: \textbf{Social Places}.
+We are sure that everybody has found themself in the situation in which they do not know what to do, even if they have many ideas of places where they could go.
+To overcome this problem, we came up with a solution that eventually evolved into a social recommendation mobile app where users can save their favourite places and share them with their friends.
+The name of this project came naturally from this idea: \textbf{Social Places}.\\
 In the context of \textbf{Social Places}, users can interact with three main subjects:
 \begin{itemize}
     \item \textbf{points of interest};
@@ -14,15 +14,15 @@ In the context of \textbf{Social Places}, users can interact with three main sub
 \end{itemize}
 Within the system, users can:
 \begin{itemize}
-    \item create and share a \textbf{point of interest} (from here we will refer to it as \textbf{poi}), which can be publicly available (friends can know about it) or privately owned;
-    \item create and share a \textbf{live event}, which is inherently public;
-    \item interact with other users by sending, confirming or denying \textbf{friendship requests} or removing \textbf{friends}.
+    \item create and share \textbf{points of interest} (from here we will refer to them as \textbf{poi}/\textbf{pois}), which can be publicly available (friends can know about them) or privately owned (that is, the opposite);
+    \item create and share \textbf{live events}, which are inherently public;
+    \item interact with other users by adding or removing \textbf{friends} through sending, confirming or denying \textbf{friendship requests}.
 \end{itemize}
-But the most interesting functionality of the application is the recommendation system.
-There are two type of recommendations users can receive:
+But the most interesting functionalities of the application come from the recommendation system.\\
+There are two type of recommendations users may receive:
 \begin{itemize}
     \item \textbf{periodic recommendations}, that are received approximately once every three hours;
-    \item \textbf{location-aware recommendations}, that can be received when the user enters inside a predefined circular area of a poi.
+    \item \textbf{location-aware recommendations}, that can be received when the user enters inside a predefined circular area of a poi, which we will call from now \textbf{geofence}.
     We say ``can" because they are only received when it makes sense (w.r.t. the output of the recommendation model - see \ref{ss:recommendation-model}) to make such an advice;
 \end{itemize}
 As input for the recommendation model we provide:
