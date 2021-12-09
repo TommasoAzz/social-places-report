@@ -3,43 +3,41 @@
 
 \label{ss:overall-system-architecture}
 \subsection{Overall system architecture}
-The system is divided in three main part:
-    \begin{itemize}
-        \item A Client;
-        \item A Server;
-        \item A Database.
-    \end{itemize}
-
-An overall picture describing the architecture is avaible at \hyperref[fig:simple_system_architecture]{System architecture}.
-
-\paragraph*{Authentication}
-We want to use a mechanism that can generate an unique token starting from user data and store it in our database. We'll use in the next APIs to check if the user from the request and the token provided in the Headers match.
-
-\paragraph*{RESTful APIs}
-The clients and the server communicate via RESTful APIs. We thought to implement a collection of APIs for each relevant part of data:
-
+The proposed system is composed by two main parts:
 \begin{itemize}
-    \item Points of Interest \textbf{'/points-of-interest'};
-    \item Live Events \textbf{'/live-events'};
-    \item Friends \textbf{'/friends'};
-    \item Recommendation \textbf{'/recommendation'};
-
-    \item Authentication \textbf{'/user-data'};
-
+    \item a \textbf{mobile application}, acting as the client with which users can interact with the system itself;
+    \item a \textbf{backend server}, that receives incoming requests from the clients and handles them;
 \end{itemize}
-    \begin{figure}[h]
-        \centering
-        \includegraphics[width=100mm,height=130mm]{images/simple.png}
-        \caption{Design of System Architecture}\label{fig:simple_system_architecture}
-    \end{figure}
-
-\paragraph*{Server}
-The server is used to handle the communication with:
+Other than these two, our system also requires:
 \begin{itemize}
-    \item Database;
-    \item Client;
-    \item Prediction Model;
+    \item an \textbf{authentication service}, a way for allowing users to be authenticated and collect data linked to them;
+    \item a \textbf{push notification service}, for contacting the users even without direct request from them.
 \end{itemize}
-The server retrieves and manipulate, on request of the user, data from the \textbf{Database}, 
-asks a recommendation to the model and sends the data that the client asked via RESTful APIs.
+An overall diagram describing the architecture follows.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/overall_system_architecture}
+    \caption{Overall system architecture}\label{fig:overall_system_architecture}
+\end{figure}
+
+\noindent
+We will go more in detail about the \textbf{mobile application} and the \textbf{backend server} in the following two sections; here we just want to discuss a little more about the \textbf{authentication} and \textbf{push notification} \textbf{services}.
+
+\subsubsection{Authentication service}
+Since the goal of the project is to develop a context-aware system we chose to focus on this aspect and try to take advantage of already available software.\\
+In the area of authentication, there are many providers that offer this kind of service. Our need is that this kind of service allows users to:
+\begin{itemize}
+    \item register an account with an e-mail address and a password;
+    \item login with the credentials they used for registering;
+    \item generate temporary tokens that have their correctness verifiable by the service itself, so to allow users to use them for showing they were granted access to the system.
+\end{itemize}
+
+\subsubsection{Push notification service}
+For the two main mobile operating systems, Android and iOS, there are already technologies that enable this requirement in a way that suit our needs.
+In this situation, it would be really reinventing the wheel trying to implement this service ourselves and therefore we just need to utilize a service that allows to:
+\begin{itemize}
+    \item send notifications at every time of the day to users that have registered for receiving them;
+    \item it is not specific to an operating system only.
+\end{itemize}
+
 \end{document}
