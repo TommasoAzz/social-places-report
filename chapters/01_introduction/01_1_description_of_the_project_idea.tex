@@ -26,5 +26,11 @@ There are two type of recommendations users may receive:
     \item \textbf{location-aware recommendations}, that can be received when the user enters inside a predefined circular area of a poi, which we will call from now \textit{geofence}.
     We say ``can" because they are only received when it makes sense (w.r.t. the output of the recommendation model - see \ref{ss:recommendation-model}) to make such an advice;
 \end{itemize}
+Moreover, users are notified whenever:
+\begin{itemize}
+    \item a new friendship request is received or confirmed;
+    \item a friend publishes a new live event;
+    \item the recommendation model retrained after having evaluated a recommendation\footnote{It is a useful feature while developing, but it could actually be removed with a more mature release of the application and the system in its whole.}
+\end{itemize}
 
 \end{document}
