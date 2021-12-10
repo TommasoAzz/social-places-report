@@ -1,12 +1,13 @@
 \documentclass[../../main]{subfiles}
 \begin{document}
-% Dataset synthetization (mostrare i dieci step che hanno portato al dataset su cui è stato fatto il training)
 
 \subsection{Dataset synthetization}
 \label{ss:dataset-synthetization}
 
-We started from geolife, a great dataset for our purpose because it collects a huge number of trajectories from a lot of user. What we want to learn is which place category will fit the user situation, by using his time \& human activity \& position.
-To achieve this goal we first need to preprocess the dataset.
+In order to build a recommendation model that suits the needs of our recommendation model, we would need a training dataset for generating a classifier for guessing a category (over three, which are \textit{restaurants}, \textit{leisure} and \textit{sport}) given a user's current latitude and longitude, human activity, day of the week and time in the day.
+Since we did not find any such dataset, we felt the need to sysnthesize one ourselves.
+We started from the dataset of \textbf{Geolife}, a project which involved the collection of GPS trajectories of 182 users in a long period of time, which was the best we could find for our objectives.\\
+To achieve our goal we have to preprocess the dataset.
 
 \paragraph{Stay Point}
 Our goal is to recommend some \textbf{place} where a user spend a certain amount of time. We trasleted this as the centroid
