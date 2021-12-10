@@ -4,22 +4,24 @@
 \subsection{Points of Interest}
 \label{ss:final-poi}
 
-A point of interest, as described earlier, is a collection of data like position, category and name that are rapresented on the map as a marker of 
-different colour based on the category. A user can create a poi touching the map or by inserting an address (actually disabled because the api is not free),
- delete it and also sharing it by an url for google maps.
-In the next picture we can see the list of poi and the dialog to create it.
+A point of interest (\textit{poi}), as described earlier, is a tuple composed by a descriptive name, latitude, longitude, address (obtained through geocoding the latitude and longitude) and a category (\textit{restaurants}, \textit{sport}, \textit{leisure}) of the place.
+Users can see their points of interest in the main screen of the application, the map, as a marker.
+Markers in the map have different colours based on their category, in order to differentiate them.
+Users can create a new \textit{poi} by tapping on the map or by inserting an address into the search bar on top of the screen\footnote{It is actually disabled because it works through Google's Places API, which is not free. Of course, it can be enabled by giving an API key linked to an account with credits in it.}.
+If users open the \textbf{Points of interest} screen from the main menu, they can see the complete list of their \textit{pois} and from here they can view their details, share them or start the navigation to them.
+In the following pictures we can see the \textbf{Points of interest} screen and the dialog that appears onto the map when creating a new \textit{poi}.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=70mm,height=150mm]{images/app/poi/poi_overview.png}
-    \includegraphics[width=70mm,height=150mm]{images/app/poi/creazione_poi.png}
-    \caption{On the left the overview of the pois list and on the right the dialog to create a poi.}
+    \includegraphics[width=0.4\textwidth]{images/app/poi/poi_overview}
+    \includegraphics[width=0.405\textwidth]{images/app/poi/creazione_poi}
+    \caption{On the left, the \textbf{Points of interest} screen. On the right, the dialog for creating a \textit{poi}.}
 \end{figure}
-By clicking on a poi is possible to see its detail and to share it as mentioned before.
-
+\noindent
+By clicking on a \textit{poi} it is possible to see its detail, to share it and start the navigation, like we mentioned above.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=70mm,height=150mm]{images/app/poi/poi_map_detail.png}
-    \includegraphics[width=70mm,height=150mm]{images/app/share.png}
-    \caption{On the left the dialog to look at the detail of a poi and on the right the sharing of a poi url.}
+    \includegraphics[width=0.4\textwidth]{images/app/poi/poi_map_detail}
+    \includegraphics[width=0.41\textwidth]{images/app/share}
+    \caption{On the left, the dialog to look at the detail of a \textit{poi}. On the right, the sharing interface for a \textit{poi}.}
 \end{figure}
 \end{document}
