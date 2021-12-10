@@ -84,7 +84,7 @@ The APIs are divided into three main category that respectively allow the user t
 
     
 \subsubsection{Recommendation Model}
-After the data synthetization we build the dataset used as input to train our model. First of all we separeted the place cateogry columns because it represent the results that we want to predict, and we removed some useless information from the dataset like the data returned from Places API and the cluster index.
+After the data synthetization we build the dataset used as input to train our model. First of all we separeted the place cateogry columns because it represent the results that we want to predict, and we removed some useless information from the dataset like the data returned from Places API, the outliers and the cluster index.
 \paragraph*{Oversample}
 We oversampled the dataset with two mechanism:
 \begin{itemize}
@@ -115,7 +115,7 @@ But probably he goes to some leisure place during the weekend in the middle morn
 The latitude and longitude is used to further discriminate some activity in any places because the data collected from the users could change due to their different attitude in the various part of the world.
 (Most of the point are from USA or China)
 \paragraph*{Test}
-After the train we tested the model obtained with the remaining 30\% of the oversampled dataset and we have instantly obtained and accuracy neart to 65\%, that is very high due to the small dataset that we obtained from the preprocessing.
+After the train we tested the model obtained with the remaining 30\% of the oversampled dataset and we have instantly obtained and accuracy near to 65\%, that is very high due to the small dataset that we obtained from the preprocessing.
 Also we tried some recommendation request from the android client emulator and we received decent predictions. To continue improving the model we implemented the possibility to retrain it by adding the recommendation that the client has received, modified with the right category if he feels that the prediction didn't suit his needs. 
 
 \subsubsection{Security}
