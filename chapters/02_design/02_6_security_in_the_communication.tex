@@ -5,11 +5,11 @@
 \label{ss:security-in-communication}
 
 \subsubsection{HTTPS Server}
-Obviously a security mechanism, to avoid tracking of the user, need to be implemented.\\
-One starting idea is to use an https certificate for the sever, but this isn't enough.
-We want to provide a function to obscure sensitive information during the request.
+A security mechanism, to avoid the communications being intercepted, needs to be implemented.\\
+One starting idea is to use HTTPS as a communication protocol between the client (mobile application) and the server (the APIs), but we believe this is not enough.
+We want to provide a way to obscure sensitive information during the communication which is the location of the user that needs to be sent in order to receive recommendations.
 \subsubsection{Obscured communication}
-There are a lot of good technique to hide sensitive information like cloacking or dummy updates.
-But both client and server need to know the actual position of the user. So we need \textbf{Location Privacy Protection Mechanism} end to end like an 
-encryption function.
+There are many techniques to hide location data, like spatial cloaking or dummy updates.
+But since we want to know the actual current position of the user, we decided that it was best to leave the location data as-is and instead to use an encrypted end-to-end communication, exploiting the RSA scheme.
+
 \end{document}
