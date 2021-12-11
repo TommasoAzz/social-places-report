@@ -57,17 +57,18 @@ We use a distance threshold of 100 meters and a time threshold of 5 minutes to f
 \label{sss:cluster}
 From the stay points which we generated with the previous algorithm, we computed clusters by using the DBScan method, choosing 300 meters as the maximum distance for two points to be considered part of the same cluster.
 Outliers were removed.
-To each centroid we added a \textit{time of arrival} (ToA) field, computed as the 0.5 quantile of all the stay points in their cluster.
+To each centroid we added a \textit{time of arrival} (ToA) field, computed as the 0.5 quantile of all the stay points in its cluster.
 We then searched places for each of the three categories around the extracted centroids with Google's \textbf{Places API}.
-We keep only the nearest place to each centroid found with \textbf{Places API}.
+We kept only the nearest place to each centroid found with \textbf{Places API}.
 
-\paragraph{Human activity and time conversion}
+\subsubsection{Human activity and time conversion}
+\label{sss:human-activity-time-conversion}
 Since centroids are synthesized, we can't have a human activity associated to them.
 Therefore, we generated it randomly with some conditions:
 \begin{itemize}
     \item restaurants should be advised when the user is either walking or still;
     \item sport and leisure could instead be generated also with all the other activities, such as car, bus or bike.
 \end{itemize}
-We also converted the ToA, splitting it into the week day and in the seconds from midnight in the same day.
+We also converted the ToA, splitting it into the week day (Monday, Tuesday, etc.) and in the seconds from midnight of the same day.
 
 \end{document}

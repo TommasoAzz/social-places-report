@@ -7,9 +7,9 @@
 \subsubsection{HTTPS Server}
 A security mechanism, to avoid the communications being intercepted, needs to be implemented.\\
 One starting idea is to use HTTPS as a communication protocol between the client (mobile application) and the server (the APIs), but we believe this is not enough.
-We want to provide a way to obscure sensitive information during the communication which is the location of the user that needs to be sent in order to receive recommendations.
+We want to provide a way to obscure sensitive information during the communication, which is the location of the user that needs to be sent in order to receive recommendations.
 \subsubsection{Obscured communication}
 There are many techniques to hide location data, like spatial cloaking or dummy updates.
-But since we want to know the actual current position of the user, we decided that it was best to leave the location data as-is and instead to use an encrypted end-to-end communication, exploiting the RSA scheme.
+But since we want to know the actual current position of the user, we decided that it was best to leave the location data as-is and instead use an encrypted end-to-end communication, exploiting the RSA scheme.
 
 \end{document}
