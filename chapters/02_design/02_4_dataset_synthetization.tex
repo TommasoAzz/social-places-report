@@ -4,46 +4,70 @@
 \subsection{Dataset synthetization}
 \label{ss:dataset-synthetization}
 
-In order to build a recommendation model that suits the needs of our recommendation model, we would need a training dataset for generating a classifier for guessing a category 
+In order to build a recommendation model that suits the needs of our recommendation model, we would need a training dataset for guessing a category 
 (over three, which are \textit{restaurants}, \textit{leisure} and \textit{sport}) given a user's current latitude and longitude, human activity, day of the week and time in the day.
 Since we did not find any such dataset, we felt the need to synthesize one ourselves.
 We started from the dataset of \textbf{Geolife}, a project which involved the collection of GPS trajectories of 182 users in a long period of time, which was the best we could find for our objectives.\\
-To achieve our goal we have to preprocess the dataset.
+To achieve our goal, a preprocessing is needed.\\
+\textbf{Note}: One may notice that in the following paragraphs we will go a little more in depth on the steps we took compared to the other sections of this second chapter.
+This is only due to the fact that we consider these steps as part of the design process.
 
-\paragraph*{Plt to csv}
-The dataset initially was in plt format for each user but with the dataset a reader was provided and we used it to convert the plt into csv file for each user
-and also a complete final csv.
-\paragraph{Stay Point}
-Our goal is to recommend some \textbf{place} where a user spend a certain amount of time. We trasleted this as the centroid
-of a trajectory included in a certain interval of time and space. We take inspiration from the paper 
-\textit{``Collaborative Location and Activity Recommendation with GPS History Data''}. 
-We use a distance threshold of 100 meters and a time threshold of 5 minutes to find a staypoint in a trajectory.
-\begin{figure}[h]
-    \centering
-    \includegraphics{images/sp.png}
-    \caption{Stay point Extraction algorithm}\label{fig:extraction_sp}
-\end{figure}
+\subsubsection{Conversion of the input files: from .plt to .csv}
+\label{sss:conversion-input-files}
+The \textbf{Geolife} dataset is published in \texttt{.plt} format and splitted in 182 different files (one for each user).
+The researchers behind this project published also a script for converting each of these files to \texttt{.csv} format.
+We used it to the generate a new dataset for each user and a new complete one, with all data from all the 182 users.
 
-\paragraph{Cluster}
-From the staypoint extracted we generated the clusters by using DBscan and as eps (maximum distance between two points to be considered neighbor) 
-300 meters because we think that a stay point should work in a radius of 300 meters. Then we used the centroid of each cluster to ask Place APIs, from Google, 
-which categories of business activty were found. Then we save the nearest one and we use as time for that activity the 0.5 quantile of the time of arrival in UTC format for each sp in the cluster.
-We had to cluster the stay points because Place API is not free and the sp we found were really a lot. Probably with a free API we could train a more precise model.
+\subsubsection{Stay Points}
+\label{sss:stay-points}
+From the initial dataset, we then wanted to understand when in their trajectiories, users would stop/stay in a certain area for a certain amount of time and regard them as \textbf{stay areas}.
+From these \textbf{stay areas}, a \textbf{stay point} can be computed as the centroid of all the points in there.\\
+We were inspired by the article \textit{``Collaborative Location and Activity Recommendation with GPS History Data"}. 
+We use a distance threshold of 100 meters and a time threshold of 5 minutes to find a \textbf{stay point} in a trajectory.
+\begin{algorithm}
+    \caption{ExtractStayPoints($d_{threshold}, t_{threshold}, \phi{}=\{Traj_k | 1 \le{} k \le{} |U|\}$)}
+    \begin{algorithmic}
+        \STATE $SP = \emptyset$
+        \FOR{$Traj_k$ $\in{} \phi$}
+            \FOR{$p_i \in{} Traj_k$}
+                \STATE $P = \emptyset$
+                \STATE $P \leftarrow{} append(P, p_i)$
+                \STATE $keep \leftarrow{} true$
+                \STATE $j \leftarrow{} i + 1$
+                \WHILE{$p_j \in{} Traj_k \wedge{} keep$}
+                    \IF{$distance(p_i,p_j) \le{} d_{threshold}$}
+                        \STATE $P \leftarrow{} append(P, p_j)$
+                        \STATE $j \leftarrow{} j + 1$
+                    \ELSE
+                        \IF{$time(p_i,p_{j-1}) \ge{} t_{threshold}$}
+                            \STATE $sp \leftarrow{} (avg(\{p.latitude | \forall{} p \in{} P\}), avg(\{p.longitude | \forall{} p \in{} P\}), first(P).time, last(P).time)$
+                            \STATE $SP \leftarrow{} append(SP, sp)$
+                            \STATE $i \leftarrow{} j - 1$
+                        \ENDIF
+                        \STATE $keep \leftarrow{} false$
+                    \ENDIF
+                \ENDWHILE
+            \ENDFOR
+        \ENDFOR
+        \RETURN $SP$
+    \end{algorithmic}
+\end{algorithm}
 
-\paragraph{Human activity}
-Because we can't know which activity were doing the users in that SP, since it is created from a lot of sp of the users, we generated it randomly 
-because an average of all was less meaning. We thought that a restaurant should be recommended when the user is walking or is still, because
-the most frequently situation when a user need to find some place to eat is when he do some walking activity, like visiting the city center.
-Instead for sport or leisure we generated also activity as car, bus or bike besides walk and still. The main thought was that when a user is moving with 
-some transport he is going to hang out and want to have fun or maybe is going in same green space to take a walk or run.
-We also converted the time, from each TZ, in UTC format to a time per day, i. e. instead of counting the time since 01/01/1970 we converted the date in seconds starting from midnight and 
-in day of week. Without these every date would be different and no meaning could be extracted.
+\subsubsection{Clusters and Places API}
+\label{sss:cluster}
+From the stay points which we generated with the previous algorithm, we computed clusters by using the DBScan method, choosing 300 meters as the maximum distance for two points to be considered part of the same cluster.
+Outliers were removed.
+To each centroid we added a \textit{time of arrival} (ToA) field, computed as the 0.5 quantile of all the stay points in their cluster.
+We then searched places for each of the three categories around the extracted centroids with Google's \textbf{Places API}.
+We keep only the nearest place to each centroid found with \textbf{Places API}.
 
-\paragraph{Model}
-After the synthetization of the dataset we trained a model based on a decision tree and used pickle to dump the weight into a .sav file so the model can be loaded 
-every time is needed. This is used also when retrain a model with user's feedback.
-\\
-By doing this we generated a dataset with clustered stay point were we can infer, thanks to a Decision Tree, which place should be recommended by 
-receiving as input the user position, his human activity and the actual time.
+\paragraph{Human activity and time conversion}
+Since centroids are synthesized, we can't have a human activity associated to them.
+Therefore, we generated it randomly with some conditions:
+\begin{itemize}
+    \item restaurants should be advised when the user is either walking or still;
+    \item sport and leisure could instead be generated also with all the other activities, such as car, bus or bike.
+\end{itemize}
+We also converted the ToA, splitting it into the week day and in the seconds from midnight in the same day.
 
 \end{document}

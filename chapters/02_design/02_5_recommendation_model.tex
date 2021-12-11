@@ -4,23 +4,14 @@
 \subsection{Recommendation model}
 \label{ss:recommendation-model}
 
-After the data synthetization we build the dataset used as input to train our model. 
-First of all we separeted the column that represent the results that we want to predict, and we removed some useless information from the dataset.
-\paragraph*{Oversample}
-An oversample is recommended in any case to reduce the probability of overfitting, and it is also useful if the starting dataset is small.
-If some columns are represented as string they have to be encoded in number, like using one hot encoding.
-\paragraph*{Train}
-\label{paragraph:train_design}
-The dataset should be splitted in train \& test data.
-
-We thought that the recommendation model should follow a path like \\\textit{`` At this \textbf{Time} in this \textbf{position} by doing this \textbf{human activity} the best place is \textbf{place category}. ''}.
-\\This is due the fact we want to discriminate determinate category by the time of the day and the human activity we are performing.
-%Ideally a user goes to the gym during the week but probably in the evening or early morning, 
-%goes to a restaurant/bar in any day at breakfast, launch or dinner time and he is probably walking or still on that place.
-%But probably he goes to some leisure place during the weekend in the middle morning, afternoon or any day after dinner in the evening/night.
-
-The latitude and longitude is used to further discriminate some activity in any places because the data collected from the users could change due to their different attitude in the various part of the world.
-\paragraph*{Test}
-After the train the model should be tested with the remaining part of the oversampled dataset, and a validate test with real user should be performed.
-To further improve the prediction model one good technique is to continue to train it with users's feedback.
+Having a synthesized dataset allow us to train a classifier for the recommendation model.
+For the purpose of our project we decided to use a decision tree as a classifier.\\
+Some steps are required before the training can take place:
+\begin{itemize}
+    \item the dataset is split into $X$ (the data columns) and $y$ (the target column, i.e., the category);
+    \item the dataset is oversampled since it is quite small;
+    \item the target column $y$ is one-hot encoded since the decision tree classifier requires only numerical values;
+    \item the dataset needs to be splitted in training (70\%) and test (30\%);
+\end{itemize}
+The model is then trained with the training dataset and finally tested with the test dataset.
 \end{document}
