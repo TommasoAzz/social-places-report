@@ -1,26 +1,29 @@
 \documentclass[../../main]{subfiles}
 \begin{document}
-\newpage
-\subsection{Recommendation from the app}
-\label{ss:final-recommendation}
-The recommendation section is the most important of the whole app considering the social/context aware part.
-It is build to recommend some place to the user, when he enter in a geofence or after a certain amount of time.
-The context aware part is thanks to the model that can predict a category thanks to the information in input and retrieve the nearest point of that category 
-to deliver it to the user. Instead the social aware part is made by searching the nearest point not only in the user's list but also in the publics pois of all
-of his friends giving more context to the recommendation.
-When a place of the right category is found the server send a push notification to the client and after the click show the detail of that poi 
-asking the user for a feedback as shown in the next figure:
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=70mm,height=150mm]{images/app/notification/recommendation/recommendation_request.png}
-    \includegraphics[width=70mm,height=150mm]{images/app/notification/recommendation/user_feedback.png}
-    \caption{On the left the notification of place recommended and on the right the dialog for the user's feedback.}
-\end{figure}
 
-When the user close the feedback's dialog a new request is maid to retrain the model and after that a notification is sent with the new accuracy.
+\subsection{Recommendations}
+\label{ss:final-recommendations}
+
+The recommendation section is the most important of the whole app considering the social- and context- aware implications.
+Its purpose is to recommend places to the users of the application, both when they enter inside a \textit{geofence} and after a certain amount of time.
+Recommendations are given as the result of the prediction classifier inside the recommendation model part of the server (see \ref{ss:recommendation-model}), which can output the best result for those given arguments. 
+Places (that is, \textit{pois}) to recommend are not only searched between all the user's \textit{pois} but also between all of the public ones owned by the user's friends.
+When a place is found, the server sends a push notification to the user's device and, if the user taps on it, the detailed view of that \textit{poi} is shown.
+In this scenario, the user is also asked to rate the recommendation, asking whether they are satisfied of the recommendation or if they wanted some other place of another category.\\
+Some explicative pictures are shown below:
 \begin{figure}[H]
     \centering
-    \includegraphics[width=70mm,height=150mm]{images/app/notification/recommendation/new_accuracy.png}
+    \includegraphics[width=0.4\textwidth]{images/app/notification/recommendation/recommendation_request}
+    \includegraphics[width=0.4\textwidth]{images/app/notification/recommendation/user_feedback}
+    \caption{On the left, the notification of a recommended place. On the right, the dialog for requesting the user's feedback on the recommendation which was just received.}
+\end{figure}
+\noindent
+When the user closes the feedback's dialog, a new API call is sent to the backend in order to retrain the model.
+When the model has retrained, a notification is sent with the new accuracy.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/app/notification/recommendation/new_accuracy}
     \caption{Model retrained notification.}
 \end{figure}
+
 \end{document}

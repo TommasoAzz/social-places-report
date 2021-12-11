@@ -1,24 +1,27 @@
 \documentclass[../../main]{subfiles}
 \begin{document}
-\newpage
+
 \subsection{Live events}
 \label{ss:final-live}
-A live events is a special poi that has a certain time to live specified during the creation. They are build to be always public and to notify 
-all user's friends when he creates one. The differents of the details dialog from a live event and a poi are that on a live event, instead of showing 
-the url and website, are listed the expiration date and the owner of the live event. The image below show the dialog of the creation of a live event and the dialog of details about a live event.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=70mm,height=150mm]{images/app/live/creazione_live.png}
-    \includegraphics[width=70mm,height=150mm]{images/app/live/live_map_detail.png}
-    \caption{On the left the dialog to create a live event with the timer and on the right the dialog of details about a live event.}
-\end{figure}
 
-As said in \ref{ss:final-friends} a user is notified when one of his friend add a live event but he can also see all the poi currently active by navigating
-to the apposite live list on the main menu fragment.
+A live event is almost similar to a \textit{poi} but it has an expiration date that needs to be specified during its creation.
+Live events are always public and available to the actual owner and their friends automatically.
+On a live event dialog showing its details, no url or address are shown.
+Instead, the expiration date and the actual owner are.
+The images below show the dialog for the creation of a live event and the dialog for retrieving details about a live event.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=70mm,height=150mm]{images/app/live/live_overview.png}
-    \includegraphics[width=70mm,height=150mm]{images/app/notification/live/notifed_live.png}
-    \caption{On the left the list of live events active and on the right the notification of a new live event added.}
+    \includegraphics[width=0.41\textwidth]{images/app/live/creazione_live}
+    \includegraphics[width=0.4\textwidth]{images/app/live/live_map_detail}
+    \caption{On the left, the dialog for creating a live event. On the right, the dialog with details about a live event.}
+\end{figure}
+\noindent
+Users are notified when one of their friends add a live event.
+Moreover, they can see all the live events not yet expired by navigating to the \textbf{Live events} screen from the main menu.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/app/live/live_overview}
+    \includegraphics[width=0.4\textwidth]{images/app/notification/live/notifed_live}
+    \caption{On the left, the \textbf{Live events} screen. On the right, the notification of a new live event added.}
 \end{figure}
 \end{document}
