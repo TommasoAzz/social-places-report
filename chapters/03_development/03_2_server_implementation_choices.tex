@@ -73,39 +73,6 @@ The recommendation model of the backend is developed in Python and it is essenti
     \item the RESTful APIs exposed to the backend main APIs, implemented with the \textbf{Flask} library;
     \item the actual classifier, trained on the training dataset and the data coming from users, of which we talked about in \hyperref[sss:recommendation-model-design]{Section 2.3}, implemented with the \textbf{Scikit-learn} library.
 \end{itemize}
-% After the data synthetization we build the dataset used as input to train our model. First of all we separeted the place cateogry columns because it represent the results that we want to predict, and we removed some useless information from the dataset like the data returned from Places API, the outliers and the cluster index.
-% \paragraph*{Oversample}
-% We oversampled the dataset with two mechanism:
-% \begin{itemize}
-%     \item \textbf{RandomOverSampler} from imblearn;
-%     \item \textbf{get\_dummies} from pandas.
-% \end{itemize}
-
-% We used RandomOverSampler to oversample X and y, and get\_dummies to oversample X relative to human activity
-% because they are saved as string. We also one hot encoding the human activity to give more meaning to this value on the dataset.
-
-% \paragraph*{Train}
-% We used the 70\% of the dataset to perform the training and we used a \textbf{Decision Tree Classifier} to train a model able to
-% predict the place category. 
-% With a request input made of:
-% \begin{itemize}
-%     \item Seconds of day;
-%     \item Day of week;
-%     \item Latitude;
-%     \item Longitude;
-%     \item Human activity encoded.
-% \end{itemize}
-% As said in \namerefLabeled{paragraph:train_design} we thought that the recommendation model should follow a path like \textit{' At this \textbf{Hour} in this \textbf{Day} in this \textbf{position} by doing this \textbf{human activity} the best place is \textbf{place category}. '}.
-% Talking about node of the tree. This is due the fact we want to discriminate determinate category by the time of the day and the human activity we are performing.
-% Ideally a user goes to the gym during the week but probably in the evening or early morning, 
-% goes to a restaurant/bar in any day at breakfast, launch or dinner time and he is probably walking or still on that place.
-% But probably he goes to some leisure place during the weekend in the middle morning, afternoon or any day after dinner in the evening/night.
-
-% The latitude and longitude is used to further discriminate some activity in any places because the data collected from the users could change due to their different attitude in the various part of the world.
-% (Most of the point are from USA or China)
-% \paragraph*{Test}
-% After the train we tested the model obtained with the remaining 30\% of the oversampled dataset and we have instantly obtained and accuracy near to 65\%, that is very high due to the small dataset that we obtained from the preprocessing.
-% Also we tried some recommendation request from the android client emulator and we received decent predictions. To continue improving the model we implemented the possibility to retrain it by adding the recommendation that the client has received, modified with the right category if he feels that the prediction didn't suit his needs. 
 
 \subsubsection{Security}
 \label{sss:security}
@@ -122,9 +89,14 @@ Let's start with HTTPS:
     \item we generated an HTTPS certificate to be imported by the Node.js server. We created one with this command:\\
     \texttt{openssl req -x509 -newkey rsa:4096 -keyout https\_private.pem}\\
     \texttt{-out https\_public.pem -sha256 -days 365}
-    \item from this certificate, we could generate the server's public key to be imported inside the source code of the mobile application, with this command:\\
-    \texttt{BKS GENERAZIONE}
+    \item from this certificate, we could generate the server's public key to be imported inside the source code of the mobile application, with these commands:\\
+    \texttt{wget https://www.bouncycastle.org/download/bcprov-jdk15on-170.jar}\\
+    \texttt{keytool -importcert -v -trustcacerts -file "https\_public.pem"}\\
+    \texttt{ -alias SocialPlaces -keystore "mystore.bks" -provider}\\
+    \texttt{org.bouncycastle.jce.provider.BouncyCastleProvider -providerpath}\\
+    \texttt{"bcprov-jdk15on-170.jar" -storetype BKS -storepass} \textit{chosen\_password}
 \end{itemize}
+The generated file \texttt{mystore.bks} then needs to moved to the Android raw resources.\\
 \noindent
 Finally, the end-to-end encrypted communication with RSA:
 \begin{itemize}
