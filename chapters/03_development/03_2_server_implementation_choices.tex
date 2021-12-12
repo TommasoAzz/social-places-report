@@ -17,7 +17,7 @@ We shall now present the choices we took in terms of technologies and implementa
 \label{sss:apis}
 
 The APIs of the backend are implemented mainly with \textbf{Node.js} and the library \textbf{Express}.
-The choice of the former was made because of the ease of setup it required for getting started and for its ease of configuration, compared to other frameworks;
+The choice of the former was made because of the ease of setup it required for getting started and for its ease of configuration compared to other frameworks;
 the latter came naturally since it is the most widespread library for implementing RESTful APIs with Node.js.\\
 The Node.js instance is used to handle the internal communications with:
 \begin{itemize}
@@ -26,7 +26,7 @@ The Node.js instance is used to handle the internal communications with:
     \item the push notifications service, implemented with \textbf{Firebase Cloud Messaging}, accessed via the \textbf{Firebase Admin} library;
     \item the recommendation model part of the backend, implemented with \textbf{Python}, accessed via the \textbf{Superagent} HTTP client library.
 \end{itemize}
-
+\noindent
 Let's now see the methods available to use for the client:
 \begin{enumerate}[I)]
     \item \texttt{/user-data}
@@ -68,10 +68,10 @@ Let's now see the methods available to use for the client:
 \subsubsection{Recommendation model}
 \label{sss:recommendation-model-development}
 
-The recommendation model of the backend is essentially composed by two parts:
+The recommendation model of the backend is developed in Python and it is essentially composed by two parts:
 \begin{itemize}
-    \item the RESTful APIs exposed to the backend main APIs;
-    \item the actual classifier, trained on the training dataset and the data coming from users, of which we talked about in \ref{sss:recommendation-model-design}.
+    \item the RESTful APIs exposed to the backend main APIs, implemented with the \textbf{Flask} library;
+    \item the actual classifier, trained on the training dataset and the data coming from users, of which we talked about in \ref{sss:recommendation-model-design}, implemented with the \textbf{Scikit-learn} library.
 \end{itemize}
 % After the data synthetization we build the dataset used as input to train our model. First of all we separeted the place cateogry columns because it represent the results that we want to predict, and we removed some useless information from the dataset like the data returned from Places API, the outliers and the cluster index.
 % \paragraph*{Oversample}
@@ -119,7 +119,7 @@ Those security mechanism are:
 \noindent
 Let's start with HTTPS:
 \begin{itemize}
-    \item we need to generate an HTTPS certificate to be imported by the Node.js server. We created one with this command:\\
+    \item we generated an HTTPS certificate to be imported by the Node.js server. We created one with this command:\\
     \texttt{openssl req -x509 -newkey rsa:4096 -keyout https\_private.pem}\\
     \texttt{-out https\_public.pem -sha256 -days 365}
     \item from this certificate, we could generate the server's public key to be imported inside the source code of the mobile application, with this command:\\
@@ -128,12 +128,12 @@ Let's start with HTTPS:
 \noindent
 Finally, the end-to-end encrypted communication with RSA:
 \begin{itemize}
-    \item we need to generate a private key to be imported by the Node.js server in order to decrypt the incoming messages. We do this with this command:\\
+    \item a private key needs to be generated and imported by the Node.js server in order to decrypt the incoming messages. We do this with this command:\\
     \texttt{openssl genrsa -out recommendation\_private\_key.pem 4096}
     \item with the obtained private key, we can generate the public key:\\
     \texttt{openssl rsa -in recommendation\_private\_key.pem -pubout -outform PEM}\\
     \texttt{-out recommendation\_public\_key.pem}
-    \item finally, we want to generate the public key from the private key, but in a the \texttt{.der} format, to be correctly imported by the mobile application:\\
+    \item finally, we generated the public key from the private key, but in a the \texttt{.der} format, to be correctly imported by the mobile application:\\
     \texttt{openssl rsa -in recommendation\_private\_key.pem -pubout -outform DER}\\
     \texttt{-out server\_key.der}
 \end{itemize}
