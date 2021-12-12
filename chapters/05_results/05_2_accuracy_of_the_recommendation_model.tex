@@ -4,8 +4,10 @@
 \subsection{Accuracy of the recommendation model}
 \label{ss:accuracy-recommendation-model}
 
-Overall we obtained a very good dataset about the places but a decent one about the human activity. Thanks to this, and to Oversample, we have immediatly
-obtained an accuracy around 65\% that is very good for such a small dataset (arount 1700 row). We tried also without the oversample but the results were very bad,
- we get an accuracy around 40\%. After few validation test, made while developing the client, we saw that the prediction made from the model were actually good.
-We think that with a few number of users that send feedback to the model for each recommendation it will increasly his accuracy in a short time. 
+Overall we may say we obtained a very good dataset on the places part but a decent one about the human activity.
+Given also the pre-processing steps on the obtained dataset for training the model, we immediately obtained an accuracy around 65\%, that is very good for such a small dataset (around 1700 rows).
+We tried also to skip the oversampling (like we described in \ref{ss:recommendation-model}) but the results were very bad: we got an accuracy around 40\%.
+After few validation tests, made while developing the mobile application, we noticed that the prediction made from the model were actually good.
+We believe that with a certain amount of users sending feedbacks to the model for each recommendation, the accuracy of the model would actually increase in a short time.
+
 \end{document}

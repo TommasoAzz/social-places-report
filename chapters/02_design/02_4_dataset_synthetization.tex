@@ -8,19 +8,19 @@ In order to build a recommendation model that suits the needs of our recommendat
 (over three, which are \textit{restaurants}, \textit{leisure} and \textit{sport}) given a user's current latitude and longitude, human activity, day of the week and time in the day.
 Since we did not find any such dataset, we felt the need to synthesize one ourselves.
 We started from the dataset of \textbf{Geolife}, a project which involved the collection of GPS trajectories of 182 users in a long period of time, which was the best we could find for our objectives.\\
-To achieve our goal, a preprocessing is needed.\\
+To achieve our goal, a pre-processing is needed.\\
 \textbf{Note}: One may notice that in the following paragraphs we will go a little more in depth on the steps we took compared to the other sections of this second chapter.
 This is only due to the fact that we consider these steps as part of the design process.
 
 \subsubsection{Conversion of the input files: from .plt to .csv}
 \label{sss:conversion-input-files}
-The \textbf{Geolife} dataset is published in \texttt{.plt} format and splitted in 182 different files (one for each user).
+The \textbf{Geolife} dataset is published in \texttt{.plt} format and split in 182 different files (one for each user).
 The researchers behind this project published also a script for converting each of these files to \texttt{.csv} format.
 We used it to the generate a new dataset for each user and a new complete one, with all data from all the 182 users.
 
 \subsubsection{Stay Points}
 \label{sss:stay-points}
-From the initial dataset, we then wanted to understand when in their trajectiories, users would stop/stay in a certain area for a certain amount of time and regard them as \textbf{stay areas}.
+From the initial dataset, we then wanted to understand when in their trajectories, users would stop/stay in a certain area for a certain amount of time and regard them as \textbf{stay areas}.
 From these \textbf{stay areas}, a \textbf{stay point} can be computed as the centroid of all the points in there.\\
 We were inspired by the article \textit{``Collaborative Location and Activity Recommendation with GPS History Data"}. 
 We use a distance threshold of 100 meters and a time threshold of 5 minutes to find a \textbf{stay point} in a trajectory.

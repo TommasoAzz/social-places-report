@@ -17,7 +17,7 @@ Since we wanted to focus more on the actual functionalities of the application, 
 This interface, in a scenario in which the user actually logs in, returns a specific type of credentials which can be handled by the \textbf{Firebase Authentication} Android library for logging the user in and returning an API token, to be attached to every API call to the backend.
 
 \subsubsection{The push notification means}
-Since we were already using a \textbf{Firebase} product, we decided to use also \textbf{Firebase Cloud Messaging} by Google for managing the push notifications, since it also free to use.
+Since we were already using a \textbf{Firebase} product, we decided to use \textbf{Firebase Cloud Messaging} by Google, too, for managing the push notifications, since it also free to use.
 Its configuration is actually pretty straightforward and only requires to specify which possible push notifications can the application receive and what to do when the application updates the so-called \textit{notification token}.
 In fact, when the application is at its first run or when the \textbf{Firebase Cloud Messaging} Android library believes it is necessary, a \textit{notification token} is sent to the backend of the system through an API call.
 This is used by the backend to target specific devices (i.e., users) when notifications need to be dispatched.
@@ -33,11 +33,11 @@ For the Android platform there are currently two ways for implementing the user 
 Since when we started the project \textbf{Jetpack Compose} was not stable yet for the public use, we decided to stick with \textbf{XML Layout}.
 
 \subsubsection{The geofence transitions manager and periodically activated tasks manager}
-In order to receive \textit{location-aware} recommendations (i.e., those based on the user entrance in a geofence) and \textit{periodical} recommendations we implemented the services the \textbf{Android SDK} provides for these purposes.\\
+In order to receive \textit{location-aware} recommendations (i.e., those based on the user entrance in a \textit{geofence}) and \textit{periodical} recommendations we implemented the services the \textbf{Android SDK} provides for these purposes.\\
 In detail:
 \begin{itemize}
-    \item for the \textit{location-aware} recommendations, we used Android's \textbf{Geofencing Client}, in which we can register a geofence for each poi the user has in its pois list and every time a new one is created.
-    Every geofence is a circular area with centre in the poi coordinates and radius to be programmatically set (we chose 300 metres);
+    \item for the \textit{location-aware} recommendations, we used Android's \textbf{Geofencing Client}, in which we can register a \textit{geofence} for each \textit{poi} the user has in its \textit{pois} list and every time a new one is created.
+    Every \textit{geofence} is a circular area with centre in the \textit{poi} coordinates and radius to be programmatically set (we chose 300 metres);
     \item for the \textit{periodical} recommendations, we used Android's \textbf{Alarm Manager}, in which we can register tasks to be executed every time a previously set alarm fires.
 \end{itemize}
 
@@ -50,7 +50,7 @@ In detail:
 \end{itemize}
 
 \subsubsection{The API connectors and business logic}
-Connecting to the backend through its API required an HTTP client since the server implements RESTful APIs, as it is explained more in detail in \ref{ss:server-implementation-choices}.
+Connecting to the backend through its API requires an HTTP client since the server implements RESTful APIs, as it is explained more in detail in \ref{ss:server-implementation-choices}.
 For this reason we chose the \textbf{Retrofit} library which allows the developer to focus mainly on the data aspect of the communication, that is, the input and output arguments, and of course which endpoints to contact.\\
 By the way, some work still need to be done: error handling, for example. That is why there is also a module of the application, the \textbf{business logic}, which purpose is to create an extra layer between the bare API calls and the UI.
 

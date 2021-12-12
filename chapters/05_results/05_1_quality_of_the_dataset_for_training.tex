@@ -4,10 +4,11 @@
 \subsection{Quality of the dataset for training}
 \label{ss:quality-training-dataset}
 
-The dataset involved in the train of the model has multiple positive and negative aspect because it evolved during the preprocessing.
-We started from geolife dataset that is a huge collection of trajectories of different users, this was a good starting point 
-because with a big dataset we can train better our model. But obviously we had to preprocceses it to obtain a more meaningful data set. 
-The precision of the stay points seems to be good thanks to the use of Places API from google that return us a lot of points near the point of the request.
-And also we didn't have the human activity that the user from dataset was doing in that moment so we had to adapt it by generating in a random way to a certain
-attention to use only walk and still for a restaurant.
+The dataset involved in the training of the model has both positive and negative aspects since it evolved during its pre-processing.\\
+We started from the \textbf{Geolife} dataset that is a huge collection of trajectories recorded by different users, which is of course good for having a good training quality.
+Obviously, the pre-processing stages for obtaining a meaningful dataset for our purposes decreased this quality.
+The centroids of the clusters retrieved from the extracted stay points seem to be good.
+Indeed, the use of \textbf{Places API} returned us many places near them, for all the categories of interest.
+Moreover, since we did not have any valid human activity related to the computed centroids (and those available in the original dataset were very much unbalanced towards the human activity of \textit{walking}), we needed to randomly generate them.\\
+All of this eventually returned a correct dataset, but possibly incorrect for the users' needs, that would need to give many feedbacks to the server in order to give out good recommendations.
 \end{document}

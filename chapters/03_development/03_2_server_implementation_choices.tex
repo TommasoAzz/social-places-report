@@ -4,15 +4,13 @@
 \subsection{Server implementation choices}
 \label{ss:server-implementation-choices}
 
-The server is that part that allow the user to manipulate his data and ask for recommendation under certain situation.
-It also implement the security mechanism to avoid backtracking of the user while answering to recommendation request.
-We decide to build the server in Nodejs after building a model in Python to adopt the use of different language and also
-have the model and the APIs server on two different container. 
+In \ref{ss:backend-architecture} we expressed how the backend is designed from a high-level perspective and how the different parts of it should communicate between each other.\\
+We shall now present the choices we took in terms of technologies and implementation of the actual modules.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{images/system_architecture}
-    \caption{Overall System Architecture}\label{fig:system_architecture}
+    \includegraphics[width=0.8\textwidth]{images/backend_architecture_technologies}
+    \caption{Backend architecture (in terms of technologies)}\label{fig:backend_architecture_technologies}
 \end{figure}
 
 \subsubsection{Nodejs Server}
