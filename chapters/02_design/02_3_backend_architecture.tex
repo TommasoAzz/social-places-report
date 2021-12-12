@@ -18,8 +18,8 @@ The backend architecture is composed by two main parts:
     \item \textbf{Recommendation model}, which is a service that runs the classifier that generates recommendations given inputs by the APIs.
 \end{itemize}
 
-\label{sss:apis}
 \subsubsection{APIs}
+\label{sss:apis}
 The Application Programming Interfaces of the backend handle all the incoming requests from the application.\\
 We can subdivide them into five main subjects:
 \begin{itemize}
@@ -38,8 +38,8 @@ Finally, the \textbf{Push notifications service} is called in the scenarios we a
     \item when the recommendation model retrained.
 \end{itemize}
 
-\label{sss:recommendation-model-design}
 \subsubsection{Recommendation model}
+\label{sss:recommendation-model-design}
 The recommendation model part of the backend handles all the requests coming from the \textbf{Recommendation API}.\\
 It acts as an interface to the classifier, which will be explained more in detail in \hyperref[ss:recommendation-model]{Section 2.5}.
 
