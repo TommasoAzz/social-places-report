@@ -4,7 +4,7 @@
 \subsection{Application implementation choices}
 \label{ss:application-implementation-choices}
 
-In \ref{ss:application-architecture} we expressed how the application is designed from a high-level perspective and how the different modules of the application should communicate between each other.\\
+In \hyperref[ss:application-architecture]{Section 2.2} we expressed how the application is designed from a high-level perspective and how the different modules of the application should communicate between each other.\\
 We shall now present the choices we took in terms of technologies and implementation of the actual modules.
 
 \subsubsection{The operating system}
@@ -12,7 +12,7 @@ The operating system we chose to develop the app for is \textit{Android} because
 The tools we used for the development of the app are the \textbf{Android SDK} and \textbf{Android Studio} as an IDE, very helpful for developing Android applications and very well integrated within the Android ecosystem.
 
 \subsubsection{The authentication means}
-Instead of designing an authentication system ourselves, which would have taken a lot of time and resources (and possibly, bad security), we decided to opt for Google's \textbf{Firebase Authentication}, given its ease of use and availability for both the \textbf{Android SDK} and the technologies chosen for developing the backend, which are presented in \ref{ss:server-implementation-choices}.
+Instead of designing an authentication system ourselves, which would have taken a lot of time and resources (and possibly, bad security), we decided to opt for Google's \textbf{Firebase Authentication}, given its ease of use and availability for both the \textbf{Android SDK} and the technologies chosen for developing the backend, which are presented in \hyperref[ss:server-implementation-choices]{Section 3.2}.
 Since we wanted to focus more on the actual functionalities of the application, we took advantage of the Android's authentication UI for asking the user to authenticate.
 This interface, in a scenario in which the user actually logs in, returns a specific type of credentials which can be handled by the \textbf{Firebase Authentication} Android library for logging the user in and returning an API token, to be attached to every API call to the backend.
 
@@ -50,7 +50,7 @@ In detail:
 \end{itemize}
 
 \subsubsection{The API connectors and business logic}
-Connecting to the backend through its API requires an HTTP client since the server implements RESTful APIs, as it is explained more in detail in \ref{ss:server-implementation-choices}.
+Connecting to the backend through its API requires an HTTP client since the server implements RESTful APIs, as it is explained more in detail in \hyperref[ss:server-implementation-choices]{Section 3.2}.
 For this reason we chose the \textbf{Retrofit} library which allows the developer to focus mainly on the data aspect of the communication, that is, the input and output arguments, and of course which endpoints to contact.\\
 By the way, some work still need to be done: error handling, for example. That is why there is also a module of the application, the \textbf{business logic}, which purpose is to create an extra layer between the bare API calls and the UI.
 
